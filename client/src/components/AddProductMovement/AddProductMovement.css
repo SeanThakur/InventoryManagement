@@ -1,0 +1,58 @@
+.ProductMovement {
+    display: flex;
+    flex-direction: column;
+}
+
+.ProductMovement__attach {
+    display: flex;
+}
+
+.ProductMovement__body {
+    padding: 5px;
+    margin: 5px;
+    width: 350px;
+}
+
+.ProductMovement__card {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.ProductMovement__card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+.ProductMovement__card__header > form > input {
+    max-width: 50px;
+}
+
+.ProductMovement__card__footer{
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ProductMovement__card__Move {
+    display: flex;
+    margin-left: 12px;
+}
+
+.ProductMovement__card__Move > h2 {
+    font-weight: 500;
+    color: #49274b;
+}
+
+.ProductMovement__card__Move > input{
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 12px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    margin-top: 2px;
+    outline: none;
+}

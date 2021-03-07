@@ -1,0 +1,12 @@
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.main__table {
+    padding: 20px;
+}
+
+.main__table h2 {
+    font-weight: 600;
+}

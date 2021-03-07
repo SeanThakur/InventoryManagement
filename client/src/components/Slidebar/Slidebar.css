@@ -1,0 +1,20 @@
+.slidebar {
+    background-color: #3f0f40;
+    color: #fff;
+    max-width: 260px !important;
+    border-top: 1px solid #49274b;
+    flex: 0.3;
+}
+
+.sidebar__line {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-top: 1px solid #49274b;
+}
+
+.slidebar__header > h2 {
+    padding: 5px;
+    margin: 5px;
+    text-decoration: none;
+    text-transform: none;
+}

@@ -1,0 +1,8 @@
+.ViewProductMovement {
+    display: flex;
+    flex-direction: column;
+}
+
+.ViewProductMovement__body {
+    padding: 20px;
+}
