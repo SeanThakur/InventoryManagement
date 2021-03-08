@@ -3,7 +3,7 @@ import pool from '../config/db.js';
 export default {
     allMovement: (callback) => {
         const query = `
-        SELECT * FROM product_movement
+        SELECT * FROM product_movement JOIN product ON product_movement.product_id = product.id
         `
         pool.query(
             query,

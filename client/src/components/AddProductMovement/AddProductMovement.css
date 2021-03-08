@@ -5,12 +5,15 @@
 
 .ProductMovement__attach {
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .ProductMovement__body {
     padding: 5px;
     margin: 5px;
-    width: 350px;
+    width: 300px;
 }
 
 .ProductMovement__card {
