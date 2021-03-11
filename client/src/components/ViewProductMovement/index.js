@@ -54,13 +54,7 @@ const Index = () => {
                                                         {m.name}
                                                     </TableCell>
                                                     <TableCell>
-                                                        {m.from_location.length === 0 && m.to_location}
-                                                        {m.to_location.length === 0 && m.from_location}
-                                                        {
-                                                           m.from_location.length > 0 && m.to_location.length > 0 && 
-                                                               m.from_location.concat(' - ' + m.to_location)
-                                                           
-                                                        }
+                                                       {m.location_description}
                                                     </TableCell>
                                                     <TableCell>
                                                         {m.qty}

@@ -3,7 +3,15 @@ import pool from '../config/db.js';
 export default {
     allMovement: (callback) => {
         const query = `
-        SELECT * FROM product_movement JOIN product ON product_movement.product_id = product.id
+            SELECT 
+                product_movement.movement_id as id, 
+                product_movement.qty, 
+                product.name, 
+                location.location_description, 
+                product_movement.timestamp 
+            FROM product_movement 
+            JOIN product ON product.id = product_movement.product_id 
+            JOIN location ON location.id = product_movement.location_id
         `
         pool.query(
             query,
@@ -19,21 +27,14 @@ export default {
     },
     addMovement: (data,callback) => {
         const query = `
-            INSERT INTO 
-            product_movement(
-                product_movement.qty, 
-                product_movement.from_location, 
-                product_movement.to_location, 
-                product_movement.product_id
-            ) VALUES(?,?,?,?)
+            INSERT INTO product_movement(product_movement.qty, product_movement.product_id, product_movement.location_id) VALUES(?,?,?)
         `
         pool.query(
             query,
             [
                 data.qty,
-                data.from,
-                data.to,
-                data.product_id
+                data.product_id,
+                data.location_id,
             ],
             (err, result) => {
                 if(err) {

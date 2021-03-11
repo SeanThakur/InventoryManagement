@@ -10,23 +10,19 @@ const Index = () => {
     const history = useHistory();
 
     const [from, setFrom] = useState('');
-    const [to, setTo] = useState('');
 
     const handleFromChange = (e) => {
         setFrom(e.target.value)
     }
 
-    const handleToChange = (e) => {
-        setTo(e.target.value)
-    }
 
     const submitHandler = (e) => {
         e.preventDefault();
         const data = {
-            from,
-            to
+            from
         }
         dispatch(addLocation(data));
+        setFrom('')
         history.push('/add_product_movement')
     }
 
@@ -40,13 +36,6 @@ const Index = () => {
                         value={from}
                         onChange={handleFromChange}
                         placeholder="From Location"
-                        required
-                    />
-                    <input 
-                        type="text"  
-                        value={to}
-                        onChange={handleToChange}
-                        placeholder="To Location"
                         required
                     />
                     <button type="submit">Add Location</button>

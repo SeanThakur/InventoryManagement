@@ -1,6 +1,7 @@
 .ViewProductMovement {
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
 }
 
 .ViewProductMovement__body {

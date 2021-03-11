@@ -5,6 +5,7 @@ import './AddProductMovement.css'
 import Header from '../Header'
 import {getAllProducts} from '../../store/feature/Product/actions'
 import {addMovement} from '../../store/feature/ProductMovement/actions'
+import {getAllLocations} from '../../store/feature/Location/actions'
 import Loading from '../Loading'
 
 import Card from '@material-ui/core/Card';
@@ -12,15 +13,21 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import FormControl from '@material-ui/core/FormControl';
 
 const Index = () => {
 
     const dispatch = useDispatch();
     const history = useHistory();
     const product = useSelector(state => state.product);
+    const location = useSelector(state => state.location);
 
     useEffect(() => {
         dispatch(getAllProducts());
+        dispatch(getAllLocations());
     }, [dispatch]);
 
     const [qty, setQty] = useState(0);
@@ -65,6 +72,7 @@ const Index = () => {
     };
 
     const handleMoveOutChange = (name) => {
+
         const shownState = detailsMoveOut.slice();
 
         const index = shownState.indexOf(name);
@@ -80,14 +88,25 @@ const Index = () => {
 
     };
 
-    const submitHandler = (e, p_id) => {
+    const MoveInSubmitHandler = (e, p_id) => {
         e.preventDefault();
         const data = {
             qty,
-            from: fromLocation,
-            to: toLocation,
-            product_id: p_id
+            product_id: p_id,
+            location_id: fromLocation
         }
+
+        dispatch(addMovement(data));
+        history.push('/view_product_movements')
+    }
+    const MoveOutSubmitHandler = (e, p_id) => {
+        e.preventDefault();
+        const data = {
+            qty,
+            product_id: p_id,
+            location_id: toLocation
+        }
+
         dispatch(addMovement(data));
         history.push('/view_product_movements')
     }
@@ -129,33 +148,54 @@ const Index = () => {
                                                 </CardActions>
                                             </div>
                                             {
-                                                details.includes(p.name) && (
+                                                details.includes(p.name)&& (
                                                     <div className="ProductMovement__card__Move"> 
-                                                        <h2>From :</h2>
-                                                        <form onSubmit={(e) => submitHandler(e,p.id)}>
-                                                            <input 
-                                                                type="text"
-                                                                value={fromLocation}
+                                                        <h2>Move In :</h2>
+                                                        <FormControl className="ProductMovement__card__formControl">  
+                                                            <InputLabel>In</InputLabel>
+                                                            <Select
+                                                                labelId="demo-simple-select-label"
+                                                                id="demo-simple-select"
+                                                                value={p.id[i] && fromLocation}
                                                                 onChange={handleFromChange}
-                                                                placeholder="Enter Move In Location"
-                                                            />
-                                                        </form>
+                                                            >
+                                                            {
+                                                                location?.loading ? (
+                                                                    <MenuItem>Loading</MenuItem>
+                                                                ) : location?.locations?.map(location => (
+                                                                    <MenuItem value={location.id} key={location.id}>{location.location_description}</MenuItem>
+                                                                ))
+                                                            }
+                                                            </Select>
+                                                        </FormControl>
+                                                        <Button className="ProductMovement__card__Button" variant="outlined" onClick={(e) => MoveInSubmitHandler(e,p.id)}>In</Button>
                                                     </div>
                                                 )
                                             }
+                                            {/* details.includes(p.name) */}
                                             {
                                                 detailsMoveOut.includes(p.name) && (
                                                     (
                                                         <div className="ProductMovement__card__Move"> 
-                                                            <h2>To :</h2>
-                                                            <form onSubmit={(e) => submitHandler(e,p.id)}>
-                                                                <input 
-                                                                    type="text"
-                                                                    value={toLocation}
+                                                            <h2>Move Out :</h2>
+                                                            <FormControl className="ProductMovement__card__formControl">
+                                                                <InputLabel>Out</InputLabel>
+                                                                <Select
+                                                                    labelId="demo-simple-select-label"
+                                                                    id="demo-simple-select"
+                                                                    value={p.id[i] && toLocation}
                                                                     onChange={handleToChange}
-                                                                    placeholder="Enter Move Out Location"
-                                                                />
-                                                            </form>
+                                                                >
+                                                                {
+                                                                    location?.loading ? (
+                                                                        <MenuItem>Loading</MenuItem>
+                                                                    ) : location?.locations?.map(location => (
+                                                                        <MenuItem value={location.id} key={location.id}>{location.location_description}</MenuItem>
+                                                                    ))
+                                                                }
+                                                                </Select>
+                                                            </FormControl>
+                                                            <Button className="ProductMovement__card__Button" variant="outlined" onClick={(e) => MoveOutSubmitHandler(e,p.id)}>Out</Button>
                                                         </div>
                                                     )
                                                 )
