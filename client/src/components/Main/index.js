@@ -3,6 +3,7 @@ import {useDispatch,useSelector} from 'react-redux';
 import './Main.css'
 import Header from '../Header'
 import {getAllProducts} from '../../store/feature/Product/actions'
+import {Link} from 'react-router-dom'
 import Loading from '../Loading'
 
 import Table from '@material-ui/core/Table';
@@ -41,6 +42,9 @@ const Index = () => {
                                         <TableCell>
                                             <h2>Product Name</h2>
                                         </TableCell>
+                                        <TableCell>
+                                            <h2>Price</h2>
+                                        </TableCell>
                                         <TableCell align="right">
                                             <h2>Edit</h2>
                                         </TableCell>
@@ -56,10 +60,15 @@ const Index = () => {
                                                 <TableCell component="th" scope="">
                                                     {p.name}
                                                 </TableCell>
+                                                <TableCell component="th" scope="">
+                                                    {p.price}
+                                                </TableCell>
                                                 <TableCell align="right">
+                                                <Link to={`/edit_product/${p.id}`}> 
                                                     <IconButton>
                                                         <EditIcon />
                                                     </IconButton>
+                                                </Link>
                                                 </TableCell>
                                                 <TableCell align="right">
                                                     <IconButton>

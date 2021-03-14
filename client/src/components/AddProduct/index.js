@@ -10,15 +10,21 @@ const Index = () => {
     const history = useHistory();
 
     const [name, setName] = useState('');
+    const [price, setPrice] = useState(0);
 
     const handleNameChange = (e) => {
         setName(e.target.value)
     } 
 
+    const handlePriceChange = (e) => {
+        setPrice(e.target.value)
+    } 
+
     const submitHandler = (e) => {
         e.preventDefault()
         const data = {
-            name
+            name,
+            price
         }
         dispatch(addProduct(data));
         history.push('/all_products')
@@ -34,6 +40,13 @@ const Index = () => {
                         value={name}
                         onChange={handleNameChange}
                         placeholder="Product Name"
+                        required
+                    />
+                    <input 
+                        type="number" 
+                        value={price}
+                        onChange={handlePriceChange}
+                        placeholder="Product Price"
                         required
                     />
                     <button type="submit">Add Product</button>

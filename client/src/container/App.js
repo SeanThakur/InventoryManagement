@@ -8,6 +8,7 @@ import AddProduct from '../components/AddProduct'
 import AddLocation from '../components/AddLocation'
 import AddProductMovement from '../components/AddProductMovement'
 import ViewProductMovement from '../components/ViewProductMovement'
+import EditProduct from '../components/EditProduct'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/add_location" component={AddLocation} exact/>
                 <Route path="/add_product_movement" component={AddProductMovement} exact/>
                 <Route path="/view_product_movements" component={ViewProductMovement} exact/>
+                <Route path="/edit_product/:id" component={EditProduct} exact/>
               </Switch>
             </div>
         </div>
